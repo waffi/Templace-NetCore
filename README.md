@@ -9,8 +9,10 @@ A brief description of what this project does and who it's for
 - CRUD
 - Repository Pattern
 - Swagger Open API
+- Database Migration
 
 ## TODO
+
 - JWT AUTH
 - DTO Mapper
 - Soft Delete
@@ -23,6 +25,11 @@ A brief description of what this project does and who it's for
 - Docker File
 - Unit Test
 - Import/Export Excel
+- DevExpress
+- Asycronous Task
+- Concurrency
+- Transaction
+- Role Access
 - Etc
 
 ## Authors
