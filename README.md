@@ -1,5 +1,5 @@
 
-# Sample .Net Core API
+# Sample .Net Core API (NOT TESTED)
 
 A brief description of what this project does and who it's for
 
