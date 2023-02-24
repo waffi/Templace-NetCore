@@ -47,7 +47,7 @@ namespace Sample.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("category/")]
-        public IActionResult Post(Category category)
+        public IActionResult Post(User category)
         {
             _repository.Category.Create(category);
             _repository.Save();
@@ -68,7 +68,7 @@ namespace Sample.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("category/{id}")]
-        public IActionResult Put(int id, Category category)
+        public IActionResult Put(int id, User category)
         {
             var entity = _repository.Category.Find(x => x.Id == id).FirstOrDefault();
             if (entity == null)
@@ -76,7 +76,7 @@ namespace Sample.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            entity.Name = category.Name;
+            entity.FirstName = category.FirstName;
 
             _repository.Category.Update(entity);
             _repository.Save();

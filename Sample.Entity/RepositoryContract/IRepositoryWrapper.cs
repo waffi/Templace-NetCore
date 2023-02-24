@@ -8,8 +8,8 @@ namespace Sample.Entity.RepositoryContract
 {
     public interface IRepositoryWrapper
     {
-        ICategoryRepository Category { get; }
-        IProductRepository Product { get; }
+        IUserRepository Category { get; }
+        IAddressRepository Product { get; }
         void Save();
     }
 }

@@ -8,18 +8,16 @@ using System.Threading.Tasks;
 
 namespace Sample.Entity.Models
 {
-    [Table("Product", Schema = "dbo")]
-    public class Product
+    [Table("Membership", Schema = "dbo")]
+    public class Membership
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-
-        public int CategoryId { get; set; }
-
-        [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+        [Required]
+        public int Fee { get; set; }
+        [Required]
+        public int MinAge { get; set; }
     }
 }

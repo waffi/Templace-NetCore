@@ -47,7 +47,7 @@ namespace Sample.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("product/")]
-        public IActionResult Post(Product product)
+        public IActionResult Post(Address product)
         {
             _repository.Product.Create(product);
             _repository.Save();
@@ -68,7 +68,7 @@ namespace Sample.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("product/{id}")]
-        public IActionResult Put(int id, Product category)
+        public IActionResult Put(int id, Address category)
         {
             var entity = _repository.Product.Find(x => x.Id == id).FirstOrDefault();
             if (entity == null)
@@ -76,7 +76,7 @@ namespace Sample.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            entity.Name = category.Name;
+            entity.Description = category.Description;
 
             _repository.Product.Update(entity);
             _repository.Save();

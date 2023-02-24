@@ -11,29 +11,29 @@ namespace Sample.Entity.Repository
     {
         private DatabaseContext _databaseContext;
 
-        private ICategoryRepository _category;
+        private IUserRepository _category;
 
-        private IProductRepository _product;
+        private IAddressRepository _product;
 
-        public ICategoryRepository Category
+        public IUserRepository Category
         {
             get
             {
                 if (_category == null)
                 {
-                    _category = new CategoryRepository(_databaseContext);
+                    _category = new UserRepository(_databaseContext);
                 }
                 return _category;
             }
         }
 
-        public IProductRepository Product
+        public IAddressRepository Product
         {
             get
             {
                 if (_product == null)
                 {
-                    _product = new ProductRepository(_databaseContext);
+                    _product = new AddressRepository(_databaseContext);
                 }
                 return _product;
             }

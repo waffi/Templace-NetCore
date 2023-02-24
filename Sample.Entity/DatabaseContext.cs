@@ -20,7 +20,9 @@ namespace Sample.Entity
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
     }
 }

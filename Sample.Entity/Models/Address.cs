@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 
 namespace Sample.Entity.Models
 {
-    [Table("Category", Schema = "dbo")]
-    public class Category
+    [Table("Address", Schema = "dbo")]
+    public class Address
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        [Required]
+        public string Description { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
+        public int UserId { get; set; }
     }
 }

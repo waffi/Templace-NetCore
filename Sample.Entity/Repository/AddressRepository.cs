@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Sample.Entity.Repository
 {
-    public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
+    public class AddressRepository : RepositoryBase<Address>, IAddressRepository
     {
-        public CategoryRepository(DatabaseContext repositoryContext)
+        public AddressRepository(DatabaseContext repositoryContext)
             : base(repositoryContext)
         {
         }

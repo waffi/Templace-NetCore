@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sample.Entity.RepositoryContract
 {
-    public interface IProductRepository : IRepositoryBase<Product>
+    public interface IAddressRepository : IRepositoryBase<Address>
     {
     }
 }
