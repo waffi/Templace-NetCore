@@ -5,13 +5,13 @@ using Sample.Entity.RepositoryContract;
 namespace Sample.Controllers
 {
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly ILogger<CategoryController> _logger;
+        private readonly ILogger<UserController> _logger;
         
         private IRepositoryWrapper _repository;
 
-        public CategoryController(ILogger<CategoryController> logger, IRepositoryWrapper repository)
+        public UserController(ILogger<UserController> logger, IRepositoryWrapper repository)
         {
             _logger = logger;
             _repository = repository;
@@ -22,10 +22,10 @@ namespace Sample.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
-        [Route("category/")]
+        [Route("user/")]
         public IActionResult Get()
         {
-            return Ok(_repository.Category.FindAll());
+            return Ok(_repository.User.FindAll());
         }
 
         /// <summary>
@@ -34,25 +34,25 @@ namespace Sample.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("category/{Id}")]
+        [Route("user/{Id}")]
         public IActionResult GetById(int Id)
         {
-            return Ok(_repository.Category.Find(x => x.Id == Id).FirstOrDefault());
+            return Ok(_repository.User.Find(x => x.Id == Id).FirstOrDefault());
         }
 
         /// <summary>
         /// Post
         /// </summary>
-        /// <param name="category"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("category/")]
-        public IActionResult Post(User category)
+        [Route("user/")]
+        public IActionResult Post(User user)
         {
-            _repository.Category.Create(category);
+            _repository.User.Create(user);
             _repository.Save();
 
-            if (category.Id == 0)
+            if (user.Id == 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
@@ -64,21 +64,21 @@ namespace Sample.Controllers
         /// Put
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="category"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("category/{id}")]
-        public IActionResult Put(int id, User category)
+        [Route("user/{id}")]
+        public IActionResult Put(int id, User user)
         {
-            var entity = _repository.Category.Find(x => x.Id == id).FirstOrDefault();
+            var entity = _repository.User.Find(x => x.Id == id).FirstOrDefault();
             if (entity == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            entity.FirstName = category.FirstName;
+            entity.FirstName = user.FirstName;
 
-            _repository.Category.Update(entity);
+            _repository.User.Update(entity);
             _repository.Save();
 
             return Ok("Updated Successfully");
@@ -90,16 +90,16 @@ namespace Sample.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("category/{id}")]
+        [Route("user/{id}")]
         public IActionResult Delete(int id)
         {
-            var entity = _repository.Category.Find(x => x.Id == id).FirstOrDefault();
+            var entity = _repository.User.Find(x => x.Id == id).FirstOrDefault();
             if (entity == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            _repository.Category.Delete(entity);
+            _repository.User.Delete(entity);
             _repository.Save();
 
             return new JsonResult("Deleted Successfully");

@@ -5,13 +5,13 @@ using Sample.Entity.RepositoryContract;
 namespace Sample.Controllers
 {
     [ApiController]
-    public class ProductController : ControllerBase
+    public class AddressController : ControllerBase
     {
-        private readonly ILogger<ProductController> _logger;
+        private readonly ILogger<AddressController> _logger;
 
         private IRepositoryWrapper _repository;
 
-        public ProductController(ILogger<ProductController> logger, IRepositoryWrapper repository)
+        public AddressController(ILogger<AddressController> logger, IRepositoryWrapper repository)
         {
             _logger = logger;
             _repository = repository;
@@ -22,10 +22,10 @@ namespace Sample.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
-        [Route("product/")]
+        [Route("address/")]
         public IActionResult Get()
         {
-            return Ok(_repository.Product.FindAll());
+            return Ok(_repository.Address.FindAll());
         }
 
         /// <summary>
@@ -34,25 +34,25 @@ namespace Sample.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("product/{Id}")]
+        [Route("address/{Id}")]
         public IActionResult GetById(int Id)
         {
-            return Ok(_repository.Product.Find(x => x.Id == Id).FirstOrDefault());
+            return Ok(_repository.Address.Find(x => x.Id == Id).FirstOrDefault());
         }
 
         /// <summary>
         /// Post
         /// </summary>
-        /// <param name="category"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("product/")]
-        public IActionResult Post(Address product)
+        [Route("address/")]
+        public IActionResult Post(Address address)
         {
-            _repository.Product.Create(product);
+            _repository.Address.Create(address);
             _repository.Save();
 
-            if (product.Id == 0)
+            if (address.Id == 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
@@ -64,21 +64,21 @@ namespace Sample.Controllers
         /// Put
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="category"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("product/{id}")]
-        public IActionResult Put(int id, Address category)
+        [Route("address/{id}")]
+        public IActionResult Put(int id, Address user)
         {
-            var entity = _repository.Product.Find(x => x.Id == id).FirstOrDefault();
+            var entity = _repository.Address.Find(x => x.Id == id).FirstOrDefault();
             if (entity == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            entity.Description = category.Description;
+            entity.Description = user.Description;
 
-            _repository.Product.Update(entity);
+            _repository.Address.Update(entity);
             _repository.Save();
 
             return Ok("Updated Successfully");
@@ -90,16 +90,16 @@ namespace Sample.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("product/{id}")]
+        [Route("address/{id}")]
         public IActionResult Delete(int id)
         {
-            var entity = _repository.Product.Find(x => x.Id == id).FirstOrDefault();
+            var entity = _repository.Address.Find(x => x.Id == id).FirstOrDefault();
             if (entity == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            _repository.Product.Delete(entity);
+            _repository.Address.Delete(entity);
             _repository.Save();
 
             return new JsonResult("Deleted Successfully");

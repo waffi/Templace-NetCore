@@ -11,31 +11,59 @@ namespace Sample.Entity.Repository
     {
         private DatabaseContext _databaseContext;
 
-        private IUserRepository _category;
+        private IUserRepository _user;
 
-        private IAddressRepository _product;
+        private IAddressRepository _address;
 
-        public IUserRepository Category
+        private ICreditCardRepository _creditCard;
+
+        private IMembershipRepository _membership;
+
+        public IUserRepository User
         {
             get
             {
-                if (_category == null)
+                if (_user == null)
                 {
-                    _category = new UserRepository(_databaseContext);
+                    _user = new UserRepository(_databaseContext);
                 }
-                return _category;
+                return _user;
             }
         }
 
-        public IAddressRepository Product
+        public IAddressRepository Address
         {
             get
             {
-                if (_product == null)
+                if (_address == null)
                 {
-                    _product = new AddressRepository(_databaseContext);
+                    _address = new AddressRepository(_databaseContext);
                 }
-                return _product;
+                return _address;
+            }
+        }
+
+        public ICreditCardRepository CreditCard
+        {
+            get
+            {
+                if (_creditCard == null)
+                {
+                    _creditCard = new CreditCardRepository(_databaseContext);
+                }
+                return _creditCard;
+            }
+        }
+
+        public IMembershipRepository Membership
+        {
+            get
+            {
+                if (_membership == null)
+                {
+                    _membership = new MembershipRepository(_databaseContext);
+                }
+                return _membership;
             }
         }
 
