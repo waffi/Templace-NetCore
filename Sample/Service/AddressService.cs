@@ -21,9 +21,14 @@ namespace Sample.Service
             return _repository.Address.FindAll().ToList();
         }
 
-        public Address FindById(int Id)
+        public Address FindById(int id)
         {
-            return _repository.Address.Find(x => x.Id == Id).FirstOrDefault();
+            return _repository.Address.Find(x => x.Id == id).FirstOrDefault();
+        }
+
+        public List<Address> FindByUserId(int userId)
+        {
+            return _repository.Address.Find(x => x.UserId == userId).ToList();
         }
 
         public Address Create(int userId, Address address)

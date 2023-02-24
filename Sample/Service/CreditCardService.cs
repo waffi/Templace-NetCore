@@ -21,9 +21,14 @@ namespace Sample.Service
             return _repository.CreditCard.FindAll().ToList();
         }
 
-        public CreditCard FindById(int Id)
+        public CreditCard FindById(int id)
         {
-            return _repository.CreditCard.Find(x => x.Id == Id).FirstOrDefault();
+            return _repository.CreditCard.Find(x => x.Id == id).FirstOrDefault();
+        }
+
+        public List<CreditCard> FindByUserId(int userId)
+        {
+            return _repository.CreditCard.Find(x => x.UserId == userId).ToList();
         }
 
         public CreditCard Create(int userId, CreditCard creditCard)

@@ -21,9 +21,9 @@ namespace Sample.Service
             return _repository.Membership.FindAll().ToList();
         }
 
-        public Membership FindById(int Id)
+        public Membership FindById(int id)
         {
-            return _repository.Membership.Find(x => x.Id == Id).FirstOrDefault();
+            return _repository.Membership.Find(x => x.Id == id).FirstOrDefault();
         }
     }
 }

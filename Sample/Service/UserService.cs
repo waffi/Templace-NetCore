@@ -21,9 +21,9 @@ namespace Sample.Service
             return _repository.User.FindAll().ToList();
         }
 
-        public User FindById(int Id)
+        public User FindById(int id)
         {
-            return _repository.User.Find(x => x.Id == Id).FirstOrDefault();
+            return _repository.User.Find(x => x.Id == id).FirstOrDefault();
         }
 
         public User Create(User user)
