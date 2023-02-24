@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sample.Entity.Models;
 using Sample.Entity.RepositoryContract;
+using Sample.Service;
 
 namespace Sample.Controllers
 {
@@ -9,12 +10,12 @@ namespace Sample.Controllers
     {
         private readonly ILogger<UserController> _logger;
         
-        private IRepositoryWrapper _repository;
+        private UserService _userService;
 
-        public UserController(ILogger<UserController> logger, IRepositoryWrapper repository)
+        public UserController(ILogger<UserController> logger, UserService userService)
         {
             _logger = logger;
-            _repository = repository;
+            _userService = userService;
         }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Sample.Controllers
         [Route("user/")]
         public IActionResult Get()
         {
-            return Ok(_repository.User.FindAll());
+            return Ok(_userService.FindAll());
         }
 
         /// <summary>
@@ -34,10 +35,10 @@ namespace Sample.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("user/{Id}")]
-        public IActionResult GetById(int Id)
+        [Route("user/{id}")]
+        public IActionResult GetById(int id)
         {
-            return Ok(_repository.User.Find(x => x.Id == Id).FirstOrDefault());
+            return Ok(_userService.FindById(id));
         }
 
         /// <summary>
@@ -49,15 +50,14 @@ namespace Sample.Controllers
         [Route("user/")]
         public IActionResult Post(User user)
         {
-            _repository.User.Create(user);
-            _repository.Save();
+            user = _userService.Create(user);
 
             if (user.Id == 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
             }
 
-            return Ok("Added Successfully");
+            return Ok(user);
         }
 
         /// <summary>
@@ -70,18 +70,9 @@ namespace Sample.Controllers
         [Route("user/{id}")]
         public IActionResult Put(int id, User user)
         {
-            var entity = _repository.User.Find(x => x.Id == id).FirstOrDefault();
-            if (entity == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
-            }
+            user = _userService.Update(id, user);
 
-            entity.FirstName = user.FirstName;
-
-            _repository.User.Update(entity);
-            _repository.Save();
-
-            return Ok("Updated Successfully");
+            return Ok(user);
         }
 
         /// <summary>
@@ -93,14 +84,7 @@ namespace Sample.Controllers
         [Route("user/{id}")]
         public IActionResult Delete(int id)
         {
-            var entity = _repository.User.Find(x => x.Id == id).FirstOrDefault();
-            if (entity == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Something Went Wrong");
-            }
-
-            _repository.User.Delete(entity);
-            _repository.Save();
+           _userService.Delete(id);
 
             return new JsonResult("Deleted Successfully");
         }

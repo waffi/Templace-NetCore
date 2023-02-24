@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Sample.Entity;
 using Sample.Entity.Repository;
 using Sample.Entity.RepositoryContract;
+using Sample.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,7 @@ namespace Sample
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<UserService, UserService>();
 
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
