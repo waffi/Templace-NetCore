@@ -30,6 +30,7 @@ A brief description of what this project does and who it's for
 - Concurrency
 - Transaction
 - Role Access
+- Encript exposed id
 - Etc
 
 ## Authors
